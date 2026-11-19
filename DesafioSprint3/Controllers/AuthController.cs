@@ -25,9 +25,7 @@ namespace DesafioSprint3.Controllers
         [HttpPost("registrar")]
         public async Task<IActionResult> Registrar([FromBody] UsuarioRegistroDTO dto)
         {
-            // Verifica se já existe alguém com esse e-mail no banco
-            var emailExiste = await _context.Usuarios.AnyAsync(u => u.Email == dto.Email);
-            if (emailExiste)
+            if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
             {
                 return BadRequest(new { mensagem = "Este e-mail já está cadastrado." });
             }
@@ -37,7 +35,7 @@ namespace DesafioSprint3.Controllers
                 NomeUsuario = dto.Nome,
                 Email = dto.Email,
                 Senha = dto.Senha,
-                Perfil = dto.Perfil
+                Perfil = "Cliente"
             };
 
             await _context.Usuarios.AddAsync(novoUsuario);

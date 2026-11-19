@@ -14,8 +14,5 @@ namespace DesafioSprint3.DTOs
         [Required(ErrorMessage = "O campo Senha é obrigatório.")]
         [MinLength(6, ErrorMessage = "A senha deve ter no mínimo 6 caracteres.")]
         public string Senha { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "O perfil é obrigatório.")]
-        public string Perfil { get; set; } = "Cliente";
     }
 }
